@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import Navbar from "./components/Navbar/Navbar";
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
+import AllRoutes from "./components/AllRoutes";
+import DrawerSiderbar from "./components/LeftSidebar/DrawerSiderbar";
+
 
 function App() {
+
+  const [toggleDrawerSidebar, setToggleDrawerSidebar] = useState({
+    display: "none",
+  });
+  const toggleDrawer = () => {
+    if (toggleDrawerSidebar.display === "none") {
+      setToggleDrawerSidebar({
+        display: "flex",
+      });
+    } else {
+      setToggleDrawerSidebar({
+        display: "none",
+      });
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+     <Router>
+      <Navbar
+       toggleDrawer={toggleDrawer}
+       
+      />
+      
+        <DrawerSiderbar
+        toggleDrawer={toggleDrawer}
+        toggleDrawerSidebar={toggleDrawerSidebar}
+        />
+      
+
+   <AllRoutes />
+     </ Router>
+    </ div>
   );
 }
 
